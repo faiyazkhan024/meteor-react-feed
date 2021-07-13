@@ -1,4 +1,74 @@
+:root {
+  --primary: #233e8b;
+  --primary_rgb: 35, 62, 139;
+  --secondary: #1eae98;
+  --secondary_rgb: 30, 174, 152;
+  --accent: #de8531;
+  --accent_rgb: 222, 133, 49;
+  --success: #18e444;
+  --success_rgb: 24, 228, 68;
+  --error: #910202;
+  --error_rgb: 145, 2, 2;
+  --pink: #ffc0cb;
+  --pink_rgb: 255, 192, 203;
+  --cream: #ffd8ad;
+  --cream_rgb: 255, 216, 173;
+  --white: #fff;
+  --white_rgb: 255, 255, 255;
+  --black: #000;
+  --black_rgb: 0, 0, 0;
+  --light_grey: #ebebeb;
+  --light_grey_rgb: 235, 235, 235;
+  --grey: #8a8a8a;
+  --grey_rgb: 138, 138, 138;
+  --dark_grey: #272727;
+  --dark_grey_rgb: 39, 39, 39;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 10px;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+hr {
+  border: var(--light_grey) 1px solid;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.colorGrey {
+  color: var(--grey);
+}
+
+.colorWhite {
+  color: var(--white);
+}
+
+.colorBlack {
+  color: var(--black);
+}
+
+.backgroundPrimary {
+  background: var(--primary);
+}
+
+.backgroundLightGrey {
+  background: var(--light_gray);
+}
+
+.displayNone {
+  display: none !important;
+}
+
+.z-index_-1 {
+  z-index: -1;
 }

@@ -9,15 +9,16 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "bcrypt": "^5.0.1",
     "meteor-node-stubs": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "meteor": {
     "mainModule": {
-      "client": "client/main.jsx",
-      "server": "server/main.js"
+      "client": "client/index.js",
+      "server": "server/index.js"
     },
-    "testModule": "tests/main.js"
+    "testModule": "tests/index.js"
   }
 }
