@@ -1,0 +1,46 @@
+.feedHeader {
+  color: var(--white);
+  background-color: var(--primary);
+  position: relative;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.feedHeader h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+.feedHeader .logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background: var(--error);
+}
+
+.feedHeader .logout:hover {
+  box-shadow: 0 0 1rem 1px var(--error);
+}
+
+.feedContainer {
+  width: 70rem;
+  margin: auto;
+  margin-bottom: 3rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 3rem;
+  box-shadow: 0 0 1rem 0 var(--light_grey);
+}
+
+.feedContainer .post {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  background: var(--white);
+  border-radius: 1rem;
+}

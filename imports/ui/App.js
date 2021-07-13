@@ -1,29 +1,15 @@
+import { Meteor } from "meteor/meteor";
+import { useTracker } from "meteor/react-meteor-data";
 import React from "react";
 
-import { useTracker } from "meteor/react-meteor-data";
-
-import { postCollection } from "../api/post";
+import Auth from "./pages/Auth/Auth";
 import Feed from "./pages/Feed/Feed";
-import PostForm from "./components/PostForm/PostForm";
 
 const App = () => {
-  const posts = useTracker(() =>
-    postCollection.find({}, { sort: { createdAt: -1 } }).fetch()
-  );
-  console.log(posts);
-  return (
-    <div>
-      <h1>Welcome to Meteor!</h1>
+  const user = useTracker(() => Meteor.user());
 
-      <PostForm />
-
-      <ul>
-        {posts.map((post) => (
-          <Feed key={post._id} post={post} />
-        ))}
-      </ul>
-    </div>
-  );
+  console.log(Meteor);
+  return <div>{user ? <Feed /> : <Auth />}</div>;
 };
 
 export default App;
