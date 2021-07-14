@@ -19,7 +19,7 @@
   --black_rgb: 0, 0, 0;
   --light_grey: #eeeeee;
   --light_grey_rgb: 235, 235, 235;
-  --grey: #8a8a8a;
+  --grey: #a8a8a8;
   --grey_rgb: 138, 138, 138;
   --dark_grey: #272727;
   --dark_grey_rgb: 39, 39, 39;
@@ -34,6 +34,10 @@
 body {
   font-family: "Roboto", sans-serif;
   background-color: rgba(var(--light-grey), 0.2);
+}
+
+p {
+  word-wrap: break-word;
 }
 
 hr {

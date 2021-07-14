@@ -1,28 +1,18 @@
-import React, { useState } from "react";
-
-import { Meteor } from "meteor/meteor";
+import React from "react";
 
 import "./PostForm.css";
 
-const PostForm = () => {
-  const [text, setText] = useState("");
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    if (!text) return;
-    Meteor.call("post.create", text);
-    setText("");
-  };
-
+const PostForm = (props) => {
   return (
     <div className="postFormContainer">
-      <form className="postForm" onSubmit={submitHandler}>
+      <form className="postForm" onSubmit={props.onSubmit}>
         <textarea
           type="text"
           className="postInput"
           placeholder="Type to add new Post"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
+          value={props.text}
+          maxLength="150"
+          onChange={(event) => props.setText(event.target.value)}
         />
         <button type="submit" className="postBtn">
           Post
