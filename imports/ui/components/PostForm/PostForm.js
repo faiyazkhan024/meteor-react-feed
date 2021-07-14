@@ -1,3 +1,4 @@
+import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
 
 import { postCollection } from "../../../api/post";
@@ -13,7 +14,9 @@ const PostForm = () => {
     if (!text) return;
 
     postCollection.insert({
-      text: text.trim(),
+      text: text,
+      userId: Meteor.userId(),
+      userEmail: Meteor.user().emails[0].address,
       createdAt: new Date(),
     });
 

@@ -26,7 +26,7 @@ const Feed = () => {
         {posts.map((post) => (
           <div className="post" key={post._id}>
             <p className="userInfo">
-              <b>By: {post.createdBy} </b>
+              <b>By: {post.userEmail} </b>
             </p>
             <br />
             <p>{post.text}</p>
