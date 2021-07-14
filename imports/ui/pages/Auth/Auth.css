@@ -92,7 +92,7 @@
   color: var(--error);
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 768px) {
   .authFormOuterContainer::after {
     top: 0;
   }
@@ -103,7 +103,7 @@
   }
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 540px) {
   .authForm .authFormHeader {
     margin-bottom: 1rem;
   }
@@ -119,5 +119,11 @@
 
   .authForm .authBtn {
     height: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .authForm .authFormHeader h1 {
+    font-size: 1.8rem;
   }
 }

@@ -1,0 +1,13 @@
+.post {
+  padding: 1rem 1.5rem;
+  height: 100%;
+  border-radius: 1rem;
+  background: var(--white);
+  box-shadow: 0 0 1rem 0 var(--light_grey);
+}
+
+@media screen and (max-width: 540px) {
+  .post {
+    font-size: 0.8rem;
+  }
+}

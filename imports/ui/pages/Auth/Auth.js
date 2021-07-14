@@ -1,5 +1,7 @@
-import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
+
+import { Meteor } from "meteor/meteor";
+import { Accounts } from "meteor/accounts-base";
 
 import "./Auth.css";
 
@@ -31,9 +33,7 @@ const Auth = () => {
           email,
           password,
         },
-        (error) => {
-          setError(error.message.replace(/[^A-Za-z]+/g, " "));
-        }
+        (error) => setError(error.message.replace(/[^A-Za-z]+/g, " "))
       );
     }
 
@@ -73,7 +73,7 @@ const Auth = () => {
     />
   );
 
-  const errorContent = <p className="error">{errorMessage}</p>;
+  const errorContent = isError && <p className="error">{errorMessage}</p>;
 
   return (
     <div className="authFormOuterContainer">
@@ -81,7 +81,7 @@ const Auth = () => {
         <form onSubmit={submit} className="authForm">
           {headerContent}
 
-          {isError && errorContent}
+          {errorContent}
 
           <input
             className="authInput"
