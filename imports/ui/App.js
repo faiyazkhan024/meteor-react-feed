@@ -8,7 +8,6 @@ import Feed from "./pages/Feed/Feed";
 const App = () => {
   const user = useTracker(() => Meteor.user());
 
-  console.log(Meteor);
   return <div>{user ? <Feed /> : <Auth />}</div>;
 };
 

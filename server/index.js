@@ -3,28 +3,21 @@ import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { postCollection } from "../imports/api/post";
 
-const SEED_USERNAME = "admin";
+const SEED_EMAIL = "admin@admin.com";
 const SEED_PASSWORD = "password";
 
 export const createPost = (text, createdBy) => {
   postCollection.insert({ text, createdBy, createdAt: new Date() });
 };
 
-export const registerUser = (username, password) => {
-  Accounts.createUser({
-    username,
-    password,
-  });
-};
-
 Meteor.startup(() => {
-  if (!Accounts.findUserByUsername(SEED_USERNAME)) {
+  if (!Accounts.findUserByEmail(SEED_EMAIL)) {
     Accounts.createUser({
-      username: SEED_USERNAME,
+      email: SEED_EMAIL,
       password: SEED_PASSWORD,
     });
   }
-  const user = Accounts.findUserByUsername(SEED_USERNAME);
+  const user = Accounts.findUserByEmail(SEED_EMAIL);
 
   if (postCollection.find().count() === 0) {
     [

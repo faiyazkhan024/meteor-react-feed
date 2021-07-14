@@ -29,18 +29,19 @@
 }
 
 .feedContainer {
-  width: 70rem;
+  width: 90%;
   margin: auto;
-  margin-bottom: 3rem;
   padding: 1rem 2rem;
+  margin-bottom: 3rem;
   font-size: 1.2rem;
-  border-radius: 3rem;
-  box-shadow: 0 0 1rem 0 var(--light_grey);
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .feedContainer .post {
-  margin: 2rem 0;
   padding: 1rem 1.5rem;
-  background: var(--white);
   border-radius: 1rem;
+  background: var(--white);
+  box-shadow: 0 0 1rem 0 var(--light_grey);
 }

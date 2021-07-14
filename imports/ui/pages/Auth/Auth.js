@@ -4,18 +4,43 @@ import React, { useState } from "react";
 import "./Auth.css";
 
 const Auth = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [signup, setSignup] = useState(true);
+
+  const setError = (message) => {
+    setErrorMessage(message);
+    setIsError(true);
+    setTimeout(() => setIsError(false), 3000);
+  };
 
   const submit = (e) => {
     e.preventDefault();
 
     if (signup) {
+      if (password !== confirmPass) {
+        setError("Make sure that the Password is Same as the Confirm Password");
+        return;
+      }
+
+      Accounts.createUser(
+        {
+          email,
+          password,
+        },
+        (error) => {
+          setError(error.message.replace(/[^A-Za-z]+/g, " "));
+        }
+      );
     }
 
     if (!signup) {
-      Meteor.loginWithPassword(username, password);
+      Meteor.loginWithPassword(email, password, (error) =>
+        setError(error.message.replace(/[^A-Za-z]+/g, " "))
+      );
     }
   };
 
@@ -44,9 +69,11 @@ const Auth = () => {
       placeholder="Confirm Password"
       name="password"
       required
-      onChange={(e) => setPassword(e.target.value)}
+      onChange={(e) => setConfirmPass(e.target.value)}
     />
   );
+
+  const errorContent = <p className="error">{errorMessage}</p>;
 
   return (
     <div className="authFormOuterContainer">
@@ -54,13 +81,15 @@ const Auth = () => {
         <form onSubmit={submit} className="authForm">
           {headerContent}
 
+          {isError && errorContent}
+
           <input
             className="authInput"
             type="text"
-            placeholder="Username"
-            name="username"
+            placeholder="Jon.doe@domain.com"
+            name="email"
             required
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <input

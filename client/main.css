@@ -74,7 +74,7 @@ button {
 }
 
 button:hover {
-  box-shadow: 0 0 1rem 1px var(--accent);
+  box-shadow: 0 0 0.5rem 1px var(--accent);
   font-size: 2rem;
 }
 
