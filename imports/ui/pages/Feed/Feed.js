@@ -41,6 +41,7 @@ const Feed = () => {
   const deletePost = (postId) => () => Meteor.call("post.remove", postId);
 
   const logout = () => Meteor.logout();
+
   return (
     <>
       <FeedHeader onLogout={logout} />

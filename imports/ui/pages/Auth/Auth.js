@@ -3,110 +3,61 @@ import React, { useState } from "react";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 
+import { useFormik } from "formik";
+
+import AuthForm from "../../components/Auth/AuthForm/AuthForm";
+import authFormValidator from "../../validators/authForm";
+
 import "./Auth.css";
 
 const Auth = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
+  const [signup, setSignup] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [signup, setSignup] = useState(true);
 
-  const setError = (message) => {
-    setErrorMessage(message);
-    setIsError(true);
-    setTimeout(() => setIsError(false), 3000);
+  const switchAuth = () => setSignup((pre) => !pre);
+
+  const initialValues = {
+    email: "",
+    password: "",
+    confirm: "",
   };
 
-  const submit = (e) => {
-    e.preventDefault();
+  const errorHandler = (error) => setIsError(error);
 
-    if (signup) {
-      if (password !== confirmPass) {
-        setError("Make sure that the Password is Same as the Confirm Password");
-        return;
-      }
-
-      Accounts.createUser(
+  const authSubmitHandler = (values) => {
+    alert("hi");
+    if (signup)
+      return Accounts.createUser(
         {
-          email,
-          password,
+          email: values.email,
+          password: values.password,
         },
-        (error) => setError(error.message.replace(/[^A-Za-z]+/g, " "))
+        errorHandler
       );
-    }
 
-    if (!signup) {
-      Meteor.loginWithPassword(email, password, (error) =>
-        setError(error.message.replace(/[^A-Za-z]+/g, " "))
+    if (!signup)
+      return Meteor.loginWithPassword(
+        values.email,
+        values.password,
+        errorHandler
       );
-    }
   };
 
-  const switchSignOption = () => setSignup((pre) => !pre);
-
-  const headerContent = signup ? (
-    <div className="authFormHeader">
-      <h1>Create Account</h1>
-      <p>
-        Already have an Account? <a onClick={switchSignOption}>Login</a>
-      </p>
-    </div>
-  ) : (
-    <div className="authFormHeader">
-      <h1>Welcome to MRF</h1>
-      <p>
-        Don't have an Account? <a onClick={switchSignOption}>Signup</a>
-      </p>
-    </div>
-  );
-
-  const confirmPasswordInput = signup && (
-    <input
-      className="authInput"
-      type="password"
-      placeholder="Confirm Password"
-      name="password"
-      required
-      onChange={(e) => setConfirmPass(e.target.value)}
-    />
-  );
-
-  const errorContent = isError && <p className="error">{errorMessage}</p>;
+  const formik = useFormik({
+    initialValues,
+    validationSchema: authFormValidator,
+    onSubmit: authSubmitHandler,
+  });
 
   return (
     <div className="authFormOuterContainer">
       <div className="authFormInnerContainer">
-        <form onSubmit={submit} className="authForm">
-          {headerContent}
-
-          {errorContent}
-
-          <input
-            className="authInput"
-            type="text"
-            placeholder="Jon.doe@domain.com"
-            name="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <input
-            className="authInput"
-            type="password"
-            placeholder="Password"
-            name="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          {confirmPasswordInput}
-
-          <button type="submit" className="authBtn">
-            {signup ? "Signup" : "Log In"}
-          </button>
-        </form>
+        <AuthForm
+          isError={isError}
+          formik={formik}
+          isSignup={signup}
+          switchAuth={switchAuth}
+        />
       </div>
     </div>
   );
